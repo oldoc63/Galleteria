@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculateTotalBtn = document.getElementById('calculate-total');
     const cookieRowsContainer = document.getElementById('cookie-rows');
 
+    // --- Inicializar la fecha del pedido con el día actual ---
+    document.getElementById('order-date').valueAsDate = new Date();
+
     // --- Función para agregar una nueva fila para un tipo de galleta ---
     addCookieRowBtn.addEventListener('click', () => {
         const newRow = document.createElement('tr');
@@ -16,12 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
         cookieRowsContainer.appendChild(newRow);
     });
 
+    // --- Función para convertir USD a VES ---
+    const convertUSDtoVES = (usdAmount, rate) => {
+        if (!rate || rate <= 0) {
+            return 0;
+        }
+        return usdAmount * rate;
+    };
+
     // --- Función para calcular los totales ---
     calculateTotalBtn.addEventListener('click', () => {
         let totalAmount = 0;
         const cookieRows = cookieRowsContainer.querySelectorAll('tr');
+        
+        // Captura la fecha del pedido
+        const orderDate = document.getElementById('order-date').value;
+        console.log(`Calculando para el pedido con fecha: ${orderDate || 'No especificada'}`);
 
-        // 1. Calcular el subtotal de cada fila y el total general
+        // 1. Calcular el subtotal de cada fila y el total general en USD
         cookieRows.forEach(row => {
             const quantityInput = row.querySelector('.cookie-quantity');
             const costInput = row.querySelector('.cookie-cost');
@@ -40,15 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const abonoInput = document.getElementById('abono');
         const abonoAmount = parseFloat(abonoInput.value) || 0;
 
-        // 3. Calcular el monto pendiente
+        // 3. Calcular el monto pendiente en USD
         const pendingAmount = totalAmount - abonoAmount;
 
-        // 4. Mostrar los resultados en la interfaz
+        // 4. Obtener la tasa de cambio y calcular el total en Bolívares
+        const exchangeRateInput = document.getElementById('exchange-rate');
+        const exchangeRate = parseFloat(exchangeRateInput.value) || 0;
+        const totalAmountVES = convertUSDtoVES(totalAmount, exchangeRate);
+
+        // 5. Mostrar todos los resultados en la interfaz
         const totalAmountDisplay = document.getElementById('total-amount');
         const pendingAmountDisplay = document.getElementById('pending-amount');
+        const totalAmountVesDisplay = document.getElementById('total-amount-ves');
 
         totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
         pendingAmountDisplay.textContent = `$${pendingAmount.toFixed(2)}`;
+        totalAmountVesDisplay.textContent = `Bs. ${totalAmountVES.toFixed(2)}`;
     });
 
 });
