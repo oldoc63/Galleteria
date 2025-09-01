@@ -68,9 +68,58 @@ document.addEventListener('DOMContentLoaded', () => {
         const pendingAmountDisplay = document.getElementById('pending-amount');
         const totalAmountVesDisplay = document.getElementById('total-amount-ves');
 
-        totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
-        pendingAmountDisplay.textContent = `$${pendingAmount.toFixed(2)}`;
+        totalAmountDisplay.textContent = `${totalAmount.toFixed(2)}`;
+        pendingAmountDisplay.textContent = `${pendingAmount.toFixed(2)}`;
         totalAmountVesDisplay.textContent = `Bs. ${totalAmountVES.toFixed(2)}`;
+
+        // --- Crear el objeto JSON para enviar al servidor ---
+        const customerName = document.getElementById('customer-name').value;
+        const cookieDetails = [];
+        cookieRows.forEach(row => {
+            const type = row.querySelector('.cookie-type').value;
+            const quantity = parseInt(row.querySelector('.cookie-quantity').value) || 0;
+            const cost = parseFloat(row.querySelector('.cookie-cost').value) || 0;
+            if (type && quantity > 0 && cost > 0) {
+                cookieDetails.push({
+                    tipo: type,
+                    cantidad: quantity,
+                    costo: cost
+                });
+            }
+        });
+
+        const orderData = {
+            nombreCliente: customerName,
+            fecha: orderDate,
+            detallesGalletas: cookieDetails,
+            totalDolares: totalAmount,
+            abono: abonoAmount,
+            montoPendiente: pendingAmount,
+            totalBolivares: totalAmountVES
+        };
+
+        // --- Enviar datos al servidor usando fetch ---
+        fetch('http://localhost:3000/api/guardar-pedido', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert('Pedido guardado exitosamente');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error al guardar el pedido. Por favor, inténtelo de nuevo.');
+        });
     });
 
 });
