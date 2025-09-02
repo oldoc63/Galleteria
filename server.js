@@ -1,49 +1,22 @@
-
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import { Low } from 'lowdb';
+import { JSONFile } from 'lowdb/node';
 
 const app = express();
 const PORT = 3000;
 
+// --- Configuración de la Base de Datos (lowdb) ---
+const adapter = new JSONFile('db.json');
+const defaultData = { pedidos: [] };
+const db = new Low(adapter, defaultData);
+
+// Cargar la base de datos
+await db.read();
+
 // --- Middlewares ---
-// Habilitar CORS para permitir peticiones desde el frontend
 app.use(cors());
-// Habilitar el parseo de JSON en el body de las peticiones
 app.use(express.json());
-
-// --- Conexión a la Base de Datos SQLite ---
-const db = new sqlite3.Database('./galleteria.db', (err) => {
-    if (err) {
-        console.error("Error al conectar con la base de datos:", err.message);
-    } else {
-        console.log("Conectado a la base de datos 'galleteria.db'.");
-    }
-});
-
-// --- Creación de la Tabla de Pedidos ---
-// Se asegura de que la tabla 'pedidos' exista al iniciar el servidor.
-db.serialize(() => {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS pedidos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cliente TEXT NOT NULL,
-            fecha TEXT NOT NULL,
-            detalles_galletas TEXT,
-            total_dolares REAL,
-            abono_dolares REAL,
-            pendiente_dolares REAL,
-            total_bolivares REAL
-        )
-    `, (err) => {
-        if (err) {
-            console.error("Error al crear la tabla 'pedidos':", err.message);
-        } else {
-            console.log("Tabla 'pedidos' lista.");
-        }
-    });
-});
-
 
 // --- Rutas de la API ---
 
@@ -52,37 +25,27 @@ db.serialize(() => {
  * @desc    Guarda un nuevo pedido en la base de datos.
  * @access  Public
  */
-app.post('/api/guardar-pedido', (req, res) => {
-    const {
-        cliente,
-        fecha,
-        detalles_galletas,
-        total_dolares,
-        abono_dolares,
-        pendiente_dolares,
-        total_bolivares
-    } = req.body;
+app.post('/api/guardar-pedido', async (req, res) => {
+    try {
+        const nuevoPedido = req.body;
+        
+        // Añade un ID único y una fecha de guardado al pedido
+        nuevoPedido.id = Date.now();
+        nuevoPedido.fechaGuardado = new Date().toISOString();
 
-    // Los detalles de las galletas (array de objetos) se convierten a un string JSON para guardarlos.
-    const detallesJSON = JSON.stringify(detalles_galletas);
+        db.data.pedidos.push(nuevoPedido);
+        await db.write(); // Guarda los cambios en el archivo db.json
 
-    const sql = `INSERT INTO pedidos (cliente, fecha, detalles_galletas, total_dolares, abono_dolares, pendiente_dolares, total_bolivares)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    
-    const params = [cliente, fecha, detallesJSON, total_dolares, abono_dolares, pendiente_dolares, total_bolivares];
-
-    db.run(sql, params, function(err) {
-        if (err) {
-            console.error("Error al insertar el pedido:", err.message);
-            return res.status(500).json({ error: "Error al guardar el pedido." });
-        }
         res.status(201).json({
             message: "Pedido guardado exitosamente.",
-            pedidoId: this.lastID
+            pedido: nuevoPedido
         });
-    });
-});
 
+    } catch (error) {
+        console.error("Error al guardar el pedido:", error);
+        res.status(500).json({ error: "Error interno al guardar el pedido." });
+    }
+});
 
 /**
  * @route   GET /api/obtener-pedidos
@@ -90,27 +53,16 @@ app.post('/api/guardar-pedido', (req, res) => {
  * @access  Public
  */
 app.get('/api/obtener-pedidos', (req, res) => {
-    const sql = "SELECT * FROM pedidos ORDER BY fecha DESC";
-
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            console.error("Error al obtener los pedidos:", err.message);
-            return res.status(500).json({ error: "Error al obtener los pedidos." });
-        }
-        
-        // Convertimos el string JSON de 'detalles_galletas' de nuevo a un objeto.
-        const pedidos = rows.map(row => ({
-            ...row,
-            detalles_galletas: JSON.parse(row.detalles_galletas || '[]')
-        }));
-
+    try {
+        const pedidos = db.data.pedidos;
         res.status(200).json(pedidos);
-    });
+    } catch (error) {
+        console.error("Error al obtener los pedidos:", error);
+        res.status(500).json({ error: "Error interno al obtener los pedidos." });
+    }
 });
-
 
 // --- Iniciar el Servidor ---
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-

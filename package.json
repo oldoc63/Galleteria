@@ -14,9 +14,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/oldoc63/Galleteria/issues"
   },
-  "homepage": "https://github.com/oldoc63/Galleteria#readme"
+  "homepage": "https://github.com/oldoc63/Galleteria#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "lowdb": "^7.0.1"
+  }
 }
