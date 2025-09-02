@@ -31,6 +31,278 @@
       "totalBolivares": 1781.28,
       "id": 1756770591781,
       "fechaGuardado": "2025-09-01T23:49:51.781Z"
+    },
+    {
+      "nombreCliente": "Javic Mariño ",
+      "fecha": "2025-08-29",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Vainilla ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla ",
+          "cantidad": 1,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 6,
+      "abono": 0,
+      "montoPendiente": 6,
+      "totalBolivares": 843.96,
+      "id": 1756772583302,
+      "fechaGuardado": "2025-09-02T00:23:03.302Z"
+    },
+    {
+      "nombreCliente": "Javic Mariño ",
+      "fecha": "2025-08-29",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Vainilla ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla ",
+          "cantidad": 1,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 6,
+      "abono": 6,
+      "montoPendiente": 0,
+      "totalBolivares": 843.96,
+      "id": 1756772639508,
+      "fechaGuardado": "2025-09-02T00:23:59.508Z"
+    },
+    {
+      "nombreCliente": "Felipe Sangenito",
+      "fecha": "2025-09-01",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate",
+          "cantidad": 2,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja",
+          "cantidad": 2,
+          "costo": 1.5
+        }
+      ],
+      "totalDolares": 7,
+      "abono": 7,
+      "montoPendiente": 0,
+      "totalBolivares": 1039.08,
+      "id": 1756773317431,
+      "fechaGuardado": "2025-09-02T00:35:17.431Z"
+    },
+    {
+      "nombreCliente": "Maria Del Pilar",
+      "fecha": "2025-08-30",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate",
+          "cantidad": 2,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja",
+          "cantidad": 2,
+          "costo": 1.5
+        }
+      ],
+      "totalDolares": 7,
+      "abono": 7,
+      "montoPendiente": 0,
+      "totalBolivares": 984.62,
+      "id": 1756773518555,
+      "fechaGuardado": "2025-09-02T00:38:38.555Z"
+    },
+    {
+      "nombreCliente": "Limbania De Sanchez",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla",
+          "cantidad": 1,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 4.5,
+      "abono": 4.5,
+      "montoPendiente": 0,
+      "totalBolivares": 632.97,
+      "id": 1756773893513,
+      "fechaGuardado": "2025-09-02T00:44:53.513Z"
+    },
+    {
+      "nombreCliente": "Hernan Erazo ",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja",
+          "cantidad": 1,
+          "costo": 1.5
+        }
+      ],
+      "totalDolares": 3.5,
+      "abono": 3.5,
+      "montoPendiente": 0,
+      "totalBolivares": 492.31,
+      "id": 1756774050838,
+      "fechaGuardado": "2025-09-02T00:47:30.838Z"
+    },
+    {
+      "nombreCliente": "Teresa Vasquez",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla ",
+          "cantidad": 1,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 4.5,
+      "abono": 5,
+      "montoPendiente": -0.5,
+      "totalBolivares": 0,
+      "id": 1756774257836,
+      "fechaGuardado": "2025-09-02T00:50:57.836Z"
+    },
+    {
+      "nombreCliente": "Patricia de Olmos ",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate",
+          "cantidad": 1,
+          "costo": 2
+        },
+        {
+          "tipo": "Naranja ",
+          "cantidad": 1,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla",
+          "cantidad": 1,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 4.5,
+      "abono": 4.5,
+      "montoPendiente": 0,
+      "totalBolivares": 632.97,
+      "id": 1756774418465,
+      "fechaGuardado": "2025-09-02T00:53:38.465Z"
+    },
+    {
+      "nombreCliente": "Dra Gaby Peña ",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Mantequilla ",
+          "cantidad": 5,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 5,
+      "abono": 5,
+      "montoPendiente": 0,
+      "totalBolivares": 703.3,
+      "id": 1756774605353,
+      "fechaGuardado": "2025-09-02T00:56:45.353Z"
+    },
+    {
+      "nombreCliente": "Anne Liu",
+      "fecha": "2025-08-31",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate ",
+          "cantidad": 2,
+          "costo": 2
+        },
+        {
+          "tipo": "Vainilla ",
+          "cantidad": 2,
+          "costo": 1.5
+        },
+        {
+          "tipo": "Mantequilla ",
+          "cantidad": 4,
+          "costo": 1
+        }
+      ],
+      "totalDolares": 11,
+      "abono": 11,
+      "montoPendiente": 0,
+      "totalBolivares": 1547.26,
+      "id": 1756774890510,
+      "fechaGuardado": "2025-09-02T01:01:30.510Z"
+    },
+    {
+      "nombreCliente": "Dra España",
+      "fecha": "2025-09-01",
+      "detallesGalletas": [
+        {
+          "tipo": "Chispas de chocolate",
+          "cantidad": 2,
+          "costo": 2
+        }
+      ],
+      "totalDolares": 4,
+      "abono": 4,
+      "montoPendiente": 0,
+      "totalBolivares": 593.76,
+      "id": 1756775057055,
+      "fechaGuardado": "2025-09-02T01:04:17.055Z"
     }
   ]
 }
