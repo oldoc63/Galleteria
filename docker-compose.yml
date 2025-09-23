@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  galleteria:
+    build: .
+    container_name: galleteria-app
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount a volume for data persistence
+      - galleteria-data:/app/data
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "http.get('http://localhost:3000/api/obtener-pedidos', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  galleteria-data:
+    driver: local

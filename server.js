@@ -18,6 +18,14 @@ await db.read();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files (HTML, CSS, JS)
+app.use(express.static('.'));
+
+// --- Root Route ---
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: '.' });
+});
+
 // --- Rutas de la API ---
 
 /**
